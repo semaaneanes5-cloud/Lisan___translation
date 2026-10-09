@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lisan — Translation Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3f1;--ink:#0d2b2a;--mute:#4d6663;--card:#fff;--line:#c8d6d2;--acc:#d9532b;--teal:#1f6f68;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1f1e;--ink:#e8f1ef;--mute:#9bb5b1;--card:#12302e;--line:#25504c;--acc:#ff8359;--teal:#5cc2b8}}
+:root[data-theme="dark"]{--bg:#0b1f1e;--ink:#e8f1ef;--mute:#9bb5b1;--card:#12302e;--line:#25504c;--acc:#ff8359;--teal:#5cc2b8}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.8 "Readex Pro",system-ui,sans-serif}
+.w{max-width:960px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-weight:700;font-size:22px;letter-spacing:.02em}
+.lang button{font:500 14px inherit;font-family:inherit;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 14px;border-radius:99px;cursor:pointer;margin-inline-start:6px}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hero{padding:56px 0 48px}
+h1{font-weight:700;font-size:clamp(32px,7vw,64px);line-height:1.2;margin:0 0 18px;max-width:14em}
+.hero p{max-width:34em;color:var(--mute);font-size:19px;margin:0 0 26px}
+.cta{display:inline-block;background:var(--acc);color:#fff;font-weight:500;text-decoration:none;padding:13px 28px;border-radius:8px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;padding:30px 0}
+.s{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.s h3{margin:0 0 6px;font-size:19px;color:var(--teal)}.s p{margin:0;color:var(--mute);font-size:16px}
+.band{border-top:1px solid var(--line);padding:34px 0 60px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.band h2{margin:0;font-size:26px}
+@media (prefers-reduced-motion:no-preference){h1{transition:opacity .25s}}
+</style>
+</head>
+<body>
+<div class="w">
+<header><div class="logo">Lisan · لسان</div>
+<div class="lang" role="group" aria-label="Language"><button data-l="ar">العربية</button><button data-l="fr">Français</button><button data-l="en">English</button></div></header>
+<section class="hero"><h1 id="h"></h1><p id="p"></p><a class="cta" id="c" href="#q"></a></section>
+<section class="row" id="sv"></section>
+<section class="band" id="q"><h2 id="b"></h2><a class="cta" id="m" href="mailto:semaaneanes5@gmail.com"></a></section>
+</div>
+<script>
+var T={
+ar:{h:"نترجم ما تقصده، لا ما تقوله الكلمات فقط",p:"ترجمة احترافية بين العربية والفرنسية والإنجليزية، تُراجَع بشريًا قبل التسليم.",c:"اطلب عرض سعر",b:"جاهز لبدء مشروعك؟",m:"راسلنا",s:[["العقود والشهادات","ترجمة معتمدة الصياغة للوثائق الرسمية والقانونية."],["المواقع والتطبيقات","نترجم الواجهات ونضبط الاتجاه من اليمين لليسار."],["المحتوى والتسويق","مقالات ونشرات وإعلانات بنبرة تناسب جمهورك."]]},
+fr:{h:"Nous traduisons ce que vous voulez dire, pas seulement les mots",p:"Traduction professionnelle entre l’arabe, le français et l’anglais, relue par un humain avant livraison.",c:"Demander un devis",b:"Prêt à lancer votre projet ?",m:"Écrivez-nous",s:[["Contrats et diplômes","Documents officiels et juridiques, rédigés avec rigueur."],["Sites et applications","Interfaces traduites, avec mise en page de droite à gauche."],["Contenu et marketing","Articles, newsletters et publicités au bon ton."]]},
+en:{h:"We translate what you mean, not just the words",p:"Professional translation between Arabic, French and English, reviewed by a human before delivery.",c:"Request a quote",b:"Ready to start your project?",m:"Email us",s:[["Contracts and certificates","Official and legal documents, worded with care."],["Websites and apps","Translated interfaces with proper right-to-left layout."],["Content and marketing","Articles, newsletters and ads in the right tone."]]}};
+function set(l){var t=T[l],d=document;d.documentElement.lang=l;d.documentElement.dir=l=="ar"?"rtl":"ltr";
+["h","p","c","b","m"].forEach(function(k){d.getElementById(k).textContent=t[k]});
+var sv=d.getElementById("sv");sv.textContent="";
+t.s.forEach(function(x){var e=d.createElement("div");e.className="s";var a=d.createElement("h3");a.textContent=x[0];var b=d.createElement("p");b.textContent=x[1];e.append(a,b);sv.append(e)});
+document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.l==l)});
+try{localStorage.setItem("lisan-lang",l)}catch(e){}}
+document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+var s="ar";try{s=localStorage.getItem("lisan-lang")||"ar"}catch(e){}
+set(T[s]?s:"ar");
+</script>
+</body>
+</html>
+
